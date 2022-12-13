@@ -7,7 +7,10 @@ void	*memset(void *s, int c, size_t n)
 
 	i = 0;
 	str = (unsigned char *)s;
-	while(i < n)
-		str[i++] = (char)c;
+	while(i++ < n)
+	{
+		*str = (char)c;
+		str++;
+	}
 	return (str);
 }
