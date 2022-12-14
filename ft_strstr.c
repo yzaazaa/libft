@@ -2,27 +2,20 @@
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int	i;
-	int	j;
-	int	first;
+	size_t	i;
 
-	i = 0;
-	first = -1;
-	while(haystack[i])
+	if(!needle)
+		return((char *)haystack);
+	while(*haystack)
 	{
-		j = 0;
-		if(haystack[i] == needle[j])
+		i = 0;
+		while(haystack[i] == needle[i])
 		{
-			first = i;
-			while(haystack[i] == needle[j] && haystack[i] && needle[j])
-			{
-				i++;
-				j++;
-			}
+			i++;
 			if(needle[j] == '\0')
-				return (first);
+				return ((char *)haystack);
 		}
-		i++;
+		haystack++;
 	}
 	return (NULL);
 }
