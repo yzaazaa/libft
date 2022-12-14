@@ -37,7 +37,7 @@ void	ft_putstr_fd(const char *s, int fd);
 void	ft_putendl_fd(const char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putnbr(int n);
-
+void	ft_putendl(const char *s);
 
 
 
