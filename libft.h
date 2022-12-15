@@ -48,5 +48,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strmap(char const *s, char (*f)(char));
 char	*ft_itoa(int n);
 char	**ft_strsplit(char const *s, char c);
+char	*ft_strtrim(char const *s);
+
 
 #endif
