@@ -1,46 +1,48 @@
 #include "libft.h"
 
-static int	nbrdigits(int n)
+static int	ft_len(long n)
 {
-	int	nbdigits;
+	int		len;
 
-	nbdigits = 0;
-	if(n == 0 || n == 1)
+	len = 0;
+	if (n == 0)
 		return (1);
-	while(n >= 1)
+	if (n < 0)
+	{
+		n *= -1;
+		len++;
+	}
+	while (n > 0)
 	{
 		n /= 10;
-		nbdigits++;
+		len++;
 	}
-	return (nbdigits);
+	return (len);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	char	*ret;
-	int	isneg;
-	int	nbdigits;
-	int	len;
+	char	*s;
+	long	m;
+	int		len;
 
-	if(n < 0)
+	m = (long) n;
+	len = ft_len(m);
+	s = malloc((len + 1) * sizeof(char));
+	if (!s)
+		return (0);
+	if (m < 0)
+		m *= -1;
+	s += len;
+	*s = 0;
+	if (m == 0)
+		*--s = '0';
+	while (m > 0)
 	{
-		isneg = 1;
-		n = -n;
+		*--s = m % 10 + '0';
+		m /= 10;
 	}
-	else
-		isneg = 0;
-	nbdigits = nbrdigits(n);
-	len = nbdigits + isneg + 1;
-	ret = malloc(sizeof(char) * len);
-	if(!ret)
-		return (NULL);
-	ret[--len] = '\0';
-	if(isneg == 1)
-		ret[0] = '-';
-	while(nbdigits-- > 0)
-	{
-		ret[--len] = n % 10 + '0';
-		n /= 10; 
-	}
-	return (ret);
+	if (n < 0)
+		*--s = '-';
+	return (s);
 }
