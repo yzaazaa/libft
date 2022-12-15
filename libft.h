@@ -50,5 +50,6 @@ char	*ft_itoa(int n);
 char	**ft_strsplit(char const *s, char c);
 char	*ft_strtrim(char const *s);
 void	ft_striter(char *s, void (*f)(char *));
+void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 #endif
