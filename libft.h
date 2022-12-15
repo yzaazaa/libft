@@ -47,7 +47,7 @@ int	ft_strequ(char const *s1, char const *s2);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strmap(char const *s, char (*f)(char));
 char	*ft_itoa(int n);
-char	**ft_strsplit(char const *s, char c);
+char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s);
 void	ft_striter(char *s, void (*f)(char *));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
