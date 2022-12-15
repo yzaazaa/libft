@@ -57,5 +57,6 @@ void	ft_strdel(char **as);
 char	*ft_strnew(size_t size);
 void	ft_memdel(void **ap);
 void	*ft_memalloc(size_t size);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 #endif
