@@ -16,7 +16,7 @@ static char	*ft_add_str(char *s, char c)
 	char	*str;
 
 	len = len_word(s, c);
-	str = ft_strsub(s, 0, len);
+	str = ft_substr(s, 0, len);
 	return (str);
 }
 
