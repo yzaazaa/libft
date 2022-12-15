@@ -30,20 +30,19 @@ static char	**ft_free_split(char **arr, int size)
 
 static int	word_count(char const *s, char c)
 {
-	int	wc;
+	int		wc;
 	int 	i;
 
 	wc = 0;
 	i = 0;
 	while(s[i])
 	{
-		while(s[i] == c)
+		while(s[i] && s[i] == c)
 			i++;
-		if(!s)
-			break;
+		if(s[i])
+			wc++;
 		while(s[i] && s[i] != c)
 			i++; 
-		wc++;
 	}
 	return (wc);
 }
