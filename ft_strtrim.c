@@ -20,6 +20,6 @@ char		*ft_strtrim(char const *s)
 	i = ft_strlen(s) - 1;
 	while(ft_isblank(s[i--]));
 	end = i;
-	ret = ft_strsub(s, start, (end - start + 1));
+	ret = ft_substr(s, start, (end - start + 1));
 	return (ret);
 }
