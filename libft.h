@@ -59,4 +59,10 @@ void	ft_memdel(void **ap);
 void	*ft_memalloc(size_t size);
 void	*ft_calloc(size_t nmemb, size_t size);
 
+typedef struct		s_list
+{
+	void		*content;
+	struct s_list	*next;
+}			t_list;
+
 #endif
