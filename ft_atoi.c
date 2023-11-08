@@ -6,7 +6,7 @@
 /*   By: yzaazaa <yzaazaa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 22:06:43 by yzaazaa           #+#    #+#             */
-/*   Updated: 2023/11/08 01:38:44 by yzaazaa          ###   ########.fr       */
+/*   Updated: 2023/11/08 03:33:05 by yzaazaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,4 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (res * sign);
-}
-
-#include <stdio.h>
-
-int	main(int ac, char **av)
-{
-	printf("%d\n", ft_atoi(av[1]));
-	printf("%d\n", atoi(av[1]));
 }
