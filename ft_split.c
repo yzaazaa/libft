@@ -1,77 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzaazaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/04 04:30:02 by yzaazaa           #+#    #+#             */
+/*   Updated: 2023/11/05 23:27:49 by yzaazaa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzaazaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/04 03:56:10 by yzaazaa           #+#    #+#             */
+/*   Updated: 2023/11/04 04:29:05 by yzaazaa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-
-static size_t	len_word(char const *s, char c)
-{
-	size_t	len;
-	
-	len = 0;
-	while(s[len] && s[len] != c)
-		len++;
-	return (len);
-}
-
-static char	*ft_add_str(char *s, char c)
-{
-	size_t	len;
-	char	*str;
-
-	len = len_word(s, c);
-	str = ft_substr(s, 0, len);
-	return (str);
-}
-
-static char	**ft_free_split(char **arr, int size)
-{
-	while(size > 0)
-		free(arr[size--]);
-	free(arr);
-	return (NULL);
-}
 
 static int	word_count(char const *s, char c)
 {
-	int		wc;
-	int 	i;
+	int	size;
+	int	i;
 
-	wc = 0;
-	i = 0;
-	while(s[i])
+	size = 0;
+	i = 1;
+	if (!*s)
+		return (1);
+	while (s[i])
 	{
-		while(s[i] && s[i] == c)
+		while (s[i] && s[i] != c)
 			i++;
-		if(s[i])
-			wc++;
-		while(s[i] && s[i] != c)
-			i++; 
-	}
-	return (wc);
-}
-
-char		**ft_split(char const *s, char c)
-{
-	size_t	i;
-	size_t	wc;
-	char	**ret;
-	char	*str;
-
-	if(!s)
-		return (NULL);
-	wc = word_count(s, c);
-	ret = (char **)malloc(sizeof(char *) * (wc + 1));
-	if(!ret)
-		return (NULL);
-	i = 0;
-	str = (char *)s;
-	while(i < wc)
-	{
-		while(*str == c)
-			str++;
-		ret[i] = ft_add_str(str, c);
-		if(ret[i] == NULL)
-			return(ft_free_split(ret, i - 1));
-		str += ft_strlen(ret[i]);
+		if ((s[i] == c || !s[i])
+			&& s[i - 1] != c)
+			size++;
+		if (!s[i])
+			break ;
 		i++;
 	}
-	ret[i] = NULL;
+	return (size + 1);
+}
+
+static int	strlen_sep(char const *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
+}
+
+static void	*ft_free(char **ret, int i)
+{
+	while (i >= 0)
+		free(ret[i--]);
+	free(ret);
+	return (NULL);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**ret;
+	int		i;
+	int		nb_words;
+	int		j;
+
+	if (!s)
+		return (NULL);
+	nb_words = word_count(s, c);
+	ret = malloc(sizeof(char *) * nb_words);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (i < nb_words - 1)
+	{
+		while (s[j] && s[j] == c)
+			j++;
+		ret[i] = ft_substr(s + j, 0, strlen_sep(s + j, c));
+		if (!ret[i++])
+			return (ft_free(ret, i));
+		j += strlen_sep(s + j, c) + 1;
+	}
+	ret[nb_words - 1] = NULL;
 	return (ret);
 }

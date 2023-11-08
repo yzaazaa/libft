@@ -1,7 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzaazaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/05 23:09:38 by yzaazaa           #+#    #+#             */
+/*   Updated: 2023/11/05 23:14:42 by yzaazaa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
-	if(s)
-		write(fd, s, ft_strlen(s));
+	int	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+		write(fd, &s[i++], 1);
 }

@@ -1,32 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzaazaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/03 21:39:11 by yzaazaa           #+#    #+#             */
+/*   Updated: 2023/11/07 23:50:10 by yzaazaa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*ret;
-	char	*str1;
-	char 	*str2;
+	char	*str;
+	size_t	len_s1;
+	size_t	len_s2;
 	size_t	i;
-	
-	if(!s1 || !s2)
+
+	if (!s1 || !s2)
 		return (NULL);
-	ret = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if(!ret)
-		return (NULL);	
-	str1 = (char *)s1;
-	str2 = (char *)s2;
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	str = malloc(len_s1 + len_s2 + 1);
+	if (!str)
+		return (NULL);
+	str = (char *)ft_memcpy(str, s1, len_s1);
 	i = 0;
-	while(*str1)
+	while (i < len_s2)
 	{
-		ret[i] = *str1;
+		str[i + len_s1] = s2[i];
 		i++;
-		str1++;
 	}
-	while(*str2)
-	{
-		ret[i] = *str2;
-		i++;
-		str2++;
-	}
-	ret[i] = '\0';
-	return (ret);
+	str[len_s1 + len_s2] = '\0';
+	return (str);
 }

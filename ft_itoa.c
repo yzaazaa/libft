@@ -1,48 +1,69 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzaazaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/04 20:13:03 by yzaazaa           #+#    #+#             */
+/*   Updated: 2023/11/06 00:55:46 by yzaazaa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
+#include <stdio.h>
 
-static int	ft_len(long n)
+static int	nb_digits(long n)
 {
-	int		len;
+	int	nbr;
 
-	len = 0;
+	nbr = 0;
 	if (n == 0)
 		return (1);
 	if (n < 0)
 	{
-		n *= -1;
-		len++;
+		nbr++;
+		n = -n;
 	}
 	while (n > 0)
 	{
+		nbr++;
 		n /= 10;
-		len++;
 	}
-	return (len);
+	return (nbr);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*s;
-	long	m;
-	int		len;
+	int		nbr_digits;
+	long	nb;
+	char	*ret;
 
-	m = (long) n;
-	len = ft_len(m);
-	s = malloc((len + 1) * sizeof(char));
-	if (!s)
-		return (0);
-	if (m < 0)
-		m *= -1;
-	s += len;
-	*s = 0;
-	if (m == 0)
-		*--s = '0';
-	while (m > 0)
+	nb = (long)n;
+	nbr_digits = nb_digits(nb);
+	ret = malloc(nbr_digits + 1);
+	if (!ret)
+		return (NULL);
+	if (nb < 0)
+		nb *= -1;
+	ret += nbr_digits;
+	*ret = 0;
+	if (nb == 0)
+		*(--ret) = '0';
+	while (nb > 0)
 	{
-		*--s = m % 10 + '0';
-		m /= 10;
+		*(--ret) = nb % 10 + '0';
+		nb /= 10;
 	}
 	if (n < 0)
-		*--s = '-';
-	return (s);
+		*(--ret) = '-';
+	return (ret);
 }
+
+/*
+int	main()
+{
+	int	nbr = -214648;
+	printf("%s\n", ft_itoa(nbr));
+}
+*/
